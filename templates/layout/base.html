@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>{% block title %}Add your title first{% endblock title %}</title>
+  </head>
+  <body
+    class="min-h-screen w-screen overflow-x-hidden text-white md:text-lg font-normal bg-slate-900"
+  >
+    <!-- Navbar -->
+    <nav class="w-screen flex justify-between items-center p-4">
+      <!-- Left section, add links or logo if needed -->
+      <div class="text-lg font-bold">
+        <a href="/" class="text-white">Home</a>
+      </div>
+
+      <!-- Center section with routing and buttons -->
+      <div
+        class="flex justify-end md:justify-around transition-all md:text-sm w-full items-center gap-8 lg:text-lg text-xs"
+      >
+        <!-- Search Input Field for Tweets -->
+        <div aria-hidden="true" class="md:flex items-center gap-4 hidden">
+          <!-- Routing links -->
+          {% if isLoggedin %}
+          <a
+            href="/tweet"
+            class="text-white font-bold underline underline-offset-4 hover:text-gray-300"
+            >Tweet</a
+          >
+          {% endif %}
+          <input
+            type="text"
+            placeholder="Search tweets..."
+            class="px-4 py-2 bg-slate-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <button
+            class="bg-blue-500 px-4 py-2 rounded-lg text-white hover:bg-blue-600"
+            onclick="searchTweets()"
+          >
+            Search
+          </button>
+        </div>
+
+        <div>
+          <!-- Login/Signup buttons -->
+          <a
+            href="/login"
+            class="bg-blue-500 px-4 py-2 rounded-lg text-white hover:bg-blue-600"
+            >Login</a
+          >
+          <a
+            href="/signup"
+            class="bg-green-500 px-4 py-2 rounded-lg text-white hover:bg-green-600"
+            >Sign Up</a
+          >
+          {% if isLoggedin %}
+          <button
+            onclick="logout()"
+            class="bg-red-500 px-4 py-2 rounded-lg hover:bg-red-600"
+          >
+            Logout
+          </button>
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+
+    {% block content %}{% endblock content %}
+
+    <script>
+      // Function to simulate tweet search action (you can implement it as needed)
+      function searchTweets() {
+        const searchTerm = document.querySelector('input[type="text"]').value;
+        if (searchTerm) {
+          alert(`Searching for tweets with the term: ${searchTerm}`);
+          // You can add logic here to handle the search, e.g., sending a request to your Django backend
+          window.location.href = `/search?query=${encodeURIComponent(
+            searchTerm
+          )}`;
+        }
+      }
+
+      function logout() {
+        // Implement your logout logic here (e.g., clear session, redirect to login page)
+        alert("Logged out successfully!");
+        window.location.href = "/login"; // Redirect to login page after logout
+      }
+    </script>
+  </body>
+</html>
