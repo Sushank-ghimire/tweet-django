@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,7 +12,9 @@
     class="min-h-screen w-screen overflow-x-hidden text-white md:text-lg font-normal bg-slate-900"
   >
     <!-- Navbar -->
-    <nav class="w-screen flex justify-between items-center p-4">
+    <nav
+      class="w-screen md:container mx-auto flex justify-between items-center p-4"
+    >
       <!-- Left section, add links or logo if needed -->
       <div class="text-lg font-bold">
         <a href="/" class="text-white">Home</a>
@@ -43,25 +47,29 @@
           </button>
         </div>
 
-        <div>
-          <!-- Login/Signup buttons -->
-          <a
-            href="/login"
-            class="bg-blue-500 px-4 py-2 rounded-lg text-white hover:bg-blue-600"
-            >Login</a
-          >
-          <a
-            href="/signup"
-            class="bg-green-500 px-4 py-2 rounded-lg text-white hover:bg-green-600"
-            >Sign Up</a
-          >
+        <div class="flex items-center justify-center gap-3">
           {% if isLoggedin %}
+          <!-- If logged in, show logout button -->
           <button
             onclick="logout()"
             class="bg-red-500 px-4 py-2 rounded-lg hover:bg-red-600"
           >
             Logout
           </button>
+          {% else %}
+          <!-- If not logged in, show login and signup buttons -->
+          <a
+            href="/login"
+            class="bg-blue-500 px-4 py-2 rounded-lg text-white hover:bg-blue-600"
+          >
+            Login
+          </a>
+          <a
+            href="/signup"
+            class="bg-green-500 px-4 py-2 rounded-lg text-white hover:bg-green-600"
+          >
+            Sign Up
+          </a>
           {% endif %}
         </div>
       </div>
@@ -85,7 +93,7 @@
       function logout() {
         // Implement your logout logic here (e.g., clear session, redirect to login page)
         alert("Logged out successfully!");
-        window.location.href = "/login"; // Redirect to login page after logout
+        window.location.href = "/"; // Redirect to login page after logout
       }
     </script>
   </body>
