@@ -1,0 +1,26 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+<div class="flex items-center justify-center min-h-screen">
+  <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
+    <h2 class="text-2xl font-semibold text-center text-gray-700">Login</h2>
+    <form method="post" class="mt-4 space-y-4 text-black">
+      {% csrf_token %}
+      {% for field in form %}
+        <div>
+          <label class="block text-sm font-medium text-gray-600">{{ field.label }}</label>
+          {{ field }}
+          {% if field.errors %}
+            <p class="text-red-500 text-xs mt-1">{{ field.errors.0 }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+      <button type="submit" class="w-full px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600">Login</button>
+    </form>
+    <p class="mt-4 text-center text-gray-600">
+      Don't have an account?
+      <a href="{% url 'signup' %}" class="text-blue-500 hover:underline">Sign up</a>
+    </p>
+  </div>
+</div>
+{% endblock %}

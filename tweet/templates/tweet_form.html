@@ -3,5 +3,49 @@
 {% block title %}Tweet Form{% endblock %}
 
 {% block content %}
-Tweet Form Section
+<main class="w-[90vw] mx-auto md:container flex flex-col justify-center items-center mt-4">
+    <h1 class="font-bold md:text-xl text-center mb-6">
+        {% if form.instance.pk %}
+        Edit your tweet
+        {% else %}
+        Create your tweet
+        {% endif %}
+    </h1>
+    
+    <form method="post" enctype="multipart/form-data" class="w-full max-w-lg p-6 rounded-lg shadow-md">
+        {% csrf_token %}
+        
+        <!-- Style the form fields -->
+        <div class="mb-4">
+            {% for field in form %}
+                <div class="mb-4">
+                    <label for="{{ field.id_for_label }}" class="block text-sm font-semibold mb-2">
+                        {{ field.label }}
+                    </label>
+                    <div class="relative text-black">
+                        {{ field }}
+                    </div>
+                    {% if field.errors %}
+                        <div class="text-red-500 text-sm mt-1">
+                            {% for error in field.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Submit button -->
+        <div class="flex justify-center">
+            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg">
+                {% if form.instance.pk %}
+                Update Tweet
+                {% else %}
+                Create Tweet
+                {% endif %}
+            </button>
+        </div>
+    </form>
+</main>
 {% endblock %}

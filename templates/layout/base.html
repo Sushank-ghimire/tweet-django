@@ -27,7 +27,7 @@
         <!-- Search Input Field for Tweets -->
         <div aria-hidden="true" class="md:flex items-center gap-4 hidden">
           <!-- Routing links -->
-          {% if isLoggedin %}
+          {% if user.is_authenticated %}
           <a
             href="/tweets"
             class="text-white font-bold underline underline-offset-4 hover:text-gray-300"
@@ -48,24 +48,28 @@
         </div>
 
         <div class="flex items-center justify-center gap-3">
-          {% if isLoggedin %}
+          {% if user.is_authenticated %}
           <!-- If logged in, show logout button -->
-          <button
-            onclick="logout()"
-            class="bg-red-500 px-4 py-2 rounded-lg hover:bg-red-600"
-          >
-            Logout
-          </button>
+          <form action="{% url 'logout' %}" method="POST">
+            {% csrf_token %}
+            <button
+              type="subimi"
+              class="bg-red-500 px-4 py-2 rounded-lg hover:bg-red-600"
+            >
+              Logout
+            </button>
+          </form>
+
           {% else %}
           <!-- If not logged in, show login and signup buttons -->
           <a
-            href="/login"
+            href="{% url 'login' %}"
             class="bg-blue-500 px-4 py-2 rounded-lg text-white hover:bg-blue-600"
           >
             Login
           </a>
           <a
-            href="/signup"
+            href="{% url 'signup' %}"
             class="bg-green-500 px-4 py-2 rounded-lg text-white hover:bg-green-600"
           >
             Sign Up
@@ -91,9 +95,8 @@
       }
 
       function logout() {
-        // Implement your logout logic here (e.g., clear session, redirect to login page)
-        alert("Logged out successfully!");
-        window.location.href = "/"; // Redirect to login page after logout
+        // Redirect to Django's built-in logout view to log the user out
+        window.location.href = "/logout"; // This will hit the logout view in your Django app
       }
     </script>
   </body>
