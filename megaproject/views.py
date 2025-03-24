@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import login
+from django.contrib.auth import login, logout, views
 from django.shortcuts import render, redirect
 
 def signup(request):
@@ -29,3 +29,9 @@ def index(request):
 
 def custom_404_view(request, exception):
     return render(request, "404.html", status=404)
+
+def logout(request):
+    if request.method == "POST":
+        views.auth_logout(request)
+        return redirect('homepage')
+    return render(request, 'logout.html')

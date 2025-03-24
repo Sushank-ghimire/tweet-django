@@ -50,15 +50,13 @@
         <div class="flex items-center justify-center gap-3">
           {% if user.is_authenticated %}
           <!-- If logged in, show logout button -->
-          <form action="{% url 'logout' %}" method="POST">
-            {% csrf_token %}
-            <button
-              type="subimi"
+            <a
+              href="{% url 'logout' %}"
+              type="submit"
               class="bg-red-500 px-4 py-2 rounded-lg hover:bg-red-600"
             >
               Logout
-            </button>
-          </form>
+            </a>
 
           {% else %}
           <!-- If not logged in, show login and signup buttons -->

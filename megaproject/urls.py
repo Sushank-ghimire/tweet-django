@@ -30,7 +30,8 @@ urlpatterns = [
     path('tweets/', include('tweet.urls')),
     path('login/', views.login_view, name='login'),
     path('signup/', views.signup, name='signup'),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    # path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('logout/', views.logout, name='logout'),
 ] + static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
 )
