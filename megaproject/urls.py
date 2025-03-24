@@ -21,6 +21,9 @@ from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from . import views
 
+# Correct way to reference the 404 handler
+handler404 = "megaproject.views.custom_404_view"
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='homepage'),
