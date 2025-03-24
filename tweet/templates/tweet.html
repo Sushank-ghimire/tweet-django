@@ -29,6 +29,7 @@
     </div>
 
     <!-- Add a colorful button with a different accent color -->
+    {% if user.is_authenticated and user.username == tweet.user.username %}
     <div class="mt-4 flex justify-between w-full">
       <a
         href="{% url 'tweet_edit' tweet.id %}"
@@ -43,6 +44,7 @@
         Delete
       </a>
     </div>
+    {% endif %}
   </div>
   {% endfor %}
 </div>

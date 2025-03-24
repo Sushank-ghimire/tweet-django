@@ -29,7 +29,7 @@
           <!-- Routing links -->
           {% if user.is_authenticated %}
           <a
-            href="/tweets"
+            href="{% url 'tweet_form' %}"
             class="text-white font-bold underline underline-offset-4 hover:text-gray-300"
             >Tweet</a
           >
